@@ -41,8 +41,14 @@ md.pattern(airquality)
 #showing you distribution of a age based on job 
 
 #Set a different color for each group
+path<- "C:\\Users\\CHIRAG\\Downloads\\ACADgILd"
+setwd(path)
+library(readr)
+bank_full<-read_delim("bank-additional-full.csv",";",escape_double = F,trim_ws = T)
+summary(bank_full)
+
 library(ggplot2)
-ggplot(bank.additional, aes(x=job, y=age, fill=job)) + 
+ggplot(bank_full, aes(x=job, y=age, fill=job)) + 
   geom_boxplot(alpha=0.3) +
   theme(legend.position="none")+
   ggtitle("Distribution of age based on a Job")
@@ -54,7 +60,7 @@ ggplot(bank.additional, aes(x=job, y=age, fill=job)) +
 #Ho: There is no relation between job and marital status
 #Ha: There is relation between job and marital status
 
-chisq.test(bank.additional$job ,bank.additional$marital)
+chisq.test(bank_full$job ,bank_full$marital)
 #now as we can see p value is nearly 0 or less which is henceforth less than 0.05 
 #p value<0.05 hence we will reject the null hypo and accept the alternative hypothesis
 #which says that There is relation between job and marital status
@@ -65,7 +71,7 @@ chisq.test(bank.additional$job ,bank.additional$marital)
 #i'm using variable job and education in this
 #Correlation test between job and education variables:
 
-newbank = bank.additional
+newbank = bank_full
 newbank$job <-as.numeric(newbank$job)
 newbank$education <-as.numeric(newbank$education)
 
@@ -93,7 +99,7 @@ result
 #Ho: There is no association between job and education
 #Ha: There is association between job and education
 
-chisq.test(bank.additional$job ,bank.additional$education)
+chisq.test(bank_full$job ,bank_full$education)
 #now as we can see p value is nearly 0 or less which is henceforth less than 0.05 
 #p value<0.05 hence we will reject the null hypo and accept the alternative hypothesis
 #which says that There is association between job and education
